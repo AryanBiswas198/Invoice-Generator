@@ -12,7 +12,7 @@ const navigation: NavigationItem[] = [{ title: "Home", path: "#" }];
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-gray-900 h-full w-full font-serif">
+    <div className="bg-black h-full w-full font-serif">
         <header>
           <nav className="items-center pt-5 mx-auto max-w-screen-xl px-8 flex space-x-2">
             <a href="#">
