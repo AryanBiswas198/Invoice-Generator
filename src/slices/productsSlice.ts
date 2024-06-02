@@ -6,6 +6,7 @@ interface Product {
   quantity: number;
   price: number;
   image?: string;
+  realId?: any;
 }
 
 interface ProductsState {

@@ -52,13 +52,12 @@ export const addProductAPI = (productData: any, token: string | null) => {
 
 
 
-export const removeProductAPI = (productId: string, token: string | null) => {
+export const removeProductAPI = (id: string, token: string | null) => {
     return async (dispatch: AppDispatch) => {
         const toastId = toast.loading("Removing product...");
         dispatch(setLoading(true));
-
         try {
-            const response = await apiConnector("DELETE", REMOVEPRODUCT_API, { productId }, {
+            const response = await apiConnector("DELETE", REMOVEPRODUCT_API, { id }, {
                 Authorization: `Bearer ${token}`,
             });
             console.log("REMOVE PRODUCT API RESPONSE -> ", response);
@@ -67,7 +66,7 @@ export const removeProductAPI = (productId: string, token: string | null) => {
                 throw new Error(response.data.message);
             }
 
-            dispatch(removeProduct(productId));
+            dispatch(removeProduct(id));
             toast.success("Product removed successfully");
         } 
         catch (error) {
@@ -80,14 +79,15 @@ export const removeProductAPI = (productId: string, token: string | null) => {
 };
 
 
-export const updateProductQuantityAPI = (productId: string, quantity: number, token: string | null) => {
+export const updateProductQuantityAPI = (id: string, quantity: number, token: string | null) => {
     return async (dispatch: AppDispatch) => {
         const toastId = toast.loading("Updating product quantity...");
         dispatch(setLoading(true));
 
         try {
+            console.log("Printing Quantity in Product API frontend: ", quantity);
             const response = await apiConnector("PUT", UPDATE_PRODUCT_QUANTITY_API, {
-                productId,
+                id,
                 quantity,
             }, {
                 Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ export const updateProductQuantityAPI = (productId: string, quantity: number, to
                 throw new Error(response.data.message);
             }
 
-            dispatch(updateProductQuantity({ id: productId, quantity }));
+            dispatch(updateProductQuantity({ id: id, quantity }));
             toast.success("Product quantity updated successfully");
         } 
         catch (error) {

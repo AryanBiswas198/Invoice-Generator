@@ -16,10 +16,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         min: 0,
     },
-    // realId: {
-    //     type: Number,
-    //     required: true,
-    // },
+    id: {
+        type: String,
+        // required: true,
+    },
     image: {
         type: String,
     },
