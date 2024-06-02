@@ -10,7 +10,7 @@ import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div className="">
+    <div className="bg-black">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="signupPage" element={<SignupPage />} />

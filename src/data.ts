@@ -8,7 +8,7 @@ export interface Product {
   export const products: Product[] = [
     {
       id: 1,
-      name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+      name: "Fjallraven - Foldsack No. 1 Backpack",
       price: 109.95,
       image: "https://i.pinimg.com/originals/80/7b/75/807b75b7f29f366b980541e7b7930211.png"
     },
@@ -32,7 +32,7 @@ export interface Product {
     },
     {
       id: 5,
-      name: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+      name: "John Women's Naga Gold Bracelet",
       price: 695,
       image: "https://jamesfree.com/cdn/shop/files/NBS9010511WHBONHE_Front_REVISED_jpg_1024x1024.png?v=1701295489"
     },
@@ -50,31 +50,31 @@ export interface Product {
     },
     {
       id: 8,
-      name: "Pierced Owl Rose Gold Plated Stainless Steel Double",
+      name: "Pierced Owl Rose Gold Plated Double",
       price: 10.99,
       image: "https://pcchandraindia.com/storage/product/large/18KBSE0524R_1.png"
     },
     {
       id: 9,
-      name: "WD 2TB Elements Portable External Hard Drive - USB 3.0",
+      name: "WD 2TB Elements External Hard Drive",
       price: 64,
       image: "https://static.wixstatic.com/media/971fb9_fad6814f197c4f158abb09537657da9a~mv2.png/v1/fill/w_280,h_234,q_90/971fb9_fad6814f197c4f158abb09537657da9a~mv2.png"
     },
     {
       id: 10,
-      name: "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+      name: "SanDisk SSD PLUS 1TB Internal SSD",
       price: 109,
       image: "https://ecommerce.datablitz.com.ph/cdn/shop/products/ssd-plus-sata-iii-ssd-front.png.wdthumb.1280.1280_2a1bbf21-ae10-42e2-8a92-c9ca866fb9eb_1024x.png?v=1676912913"
     },
     {
       id: 11,
-      name: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+      name: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance ",
       price: 109,
       image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg"
     },
     {
       id: 12,
-      name: "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+      name: "WD 4TB Gaming Drive Portable External Hard Drive",
       price: 114,
       image: "https://cdn.cs.1worldsync.com/syndication/feeds/wd/inline-content/7D/2244F7EA61586C5A4BC96484A8EF88D466977ECE_MYPASSPORT4TB5TBBLACKHERO_w_400_hero.png"
     },
