@@ -118,24 +118,30 @@ export interface TotalRateAndGST {
     totalGST: number;
 }
 
-export const calculateTotalRateAPI = () => {
+export const calculateTotalRateAPI = (token: string | null) => {
     return async (dispatch: AppDispatch) => {
         const toastId = toast.loading("Calculating total rate...");
         dispatch(setLoading(true));
 
         try {
-            const response = await apiConnector("GET", CALCULATE_TOTAL_RATE_API);
+            const response = await apiConnector("GET", CALCULATE_TOTAL_RATE_API, null, {
+                Authorization: `Bearer ${token}`,
+            });
             console.log("CALCULATE TOTAL RATE API RESPONSE -> ", response);
 
-            if (!response.data.success) {
+            if (!response || !response.data || !response.data.success) {
                 throw new Error(response.data.message);
             }
 
-            const { totalRate, totalGST }: TotalRateAndGST = response.data?.data;
+            const { totalRate, totalGST }: TotalRateAndGST = response.data;
             toast.success(`Total rate and GST calculated successfully`);
             // You can dispatch actions to store totalRate and totalGST in Redux state if needed
             dispatch(setTotalRate(totalRate));
             dispatch(setTotalGST(totalGST));
+
+            dispatch(setLoading(false));
+            toast.dismiss(toastId);
+            return response;
         } 
         catch (error) {
             console.error("CALCULATE TOTAL RATE API ERROR -> ", error);
@@ -148,13 +154,15 @@ export const calculateTotalRateAPI = () => {
 };
 
 
-export const getAllUserProductsAPI = () => {
+export const getAllUserProductsAPI = (token: string | null) => {
     return async (dispatch: AppDispatch) => {
       const toastId = toast.loading("Fetching user products...");
       dispatch(setLoading(true));
   
       try {
-        const response = await apiConnector("GET", GET_ALL_USER_PRODUCTS_API);
+        const response = await apiConnector("GET", GET_ALL_USER_PRODUCTS_API, null, {
+            Authorization: `Bearer ${token}`,
+        });
         console.log("GET ALL USER PRODUCTS API RESPONSE -> ", response);
   
         if (!response.data.success) {

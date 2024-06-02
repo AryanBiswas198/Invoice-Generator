@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductAPI, removeProductAPI, updateProductQuantityAPI } from "../services/operations/productAPI";
+import { addProductAPI, removeProductAPI, updateProductQuantityAPI, calculateTotalRateAPI } from "../services/operations/productAPI";
 import { products } from "../data";
 
 import { AppDispatch, RootState } from "../services/operations/productAPI";
@@ -18,6 +18,20 @@ const ProductPage: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
 
   const [selectedProducts, setSelectedProducts] = useState<{ [key: number]: number }>({});
+  const [totalRate, setTotalRate] = useState<any>(0);
+  const [totalGST, setTotalGST] = useState<any>(0);
+
+  useEffect(() => {
+    dispatch(calculateTotalRateAPI(token))
+        .then((response: any) => {
+            setTotalRate(response?.data?.totalRate);
+            setTotalGST(response?.data?.totalGST);
+        })
+        .catch((error: any) => {
+            console.error("Error calculating total rate and GST:", error);
+        });
+}, [dispatch, token]);
+
 
   const handleAddProduct = async (product: Product) => {
     setSelectedProducts((prevSelectedProducts) => ({
@@ -152,16 +166,14 @@ const renderCart = () => {
           ))
         )}
         <div className="mt-8 md:mt-32 flex flex-col">
-          <p className="text-3xl md:text-4xl text-gray-300 my-2 font-bold">Total:    <span className="text-2xl md:text-3xl text-gray-100">${total.toFixed(2)}</span></p>
-          <p className="text-xl md:text-2xl font-bold my-2 text-gray-300">GST: ${gst.toFixed(2)}</p>
-          <p className="text-red-500 text-3xl md:text-4xl border-t-2 py-2 my-4 font-semibold">Grand Total: ${grandTotal.toFixed(2)}</p>
+          <p className="text-3xl md:text-4xl text-gray-300 my-2 font-bold">Total:    <span className="text-2xl md:text-3xl text-gray-100">${totalRate.toFixed(2)}</span></p>
+          <p className="text-xl md:text-2xl font-bold my-2 text-gray-300">GST: ${totalGST.toFixed(2)}</p>
+          <p className="text-red-500 text-3xl md:text-4xl border-t-2 py-2 my-4 font-semibold">Grand Total: ${(totalRate + totalGST).toFixed(2)}</p>
         </div>
       </div>
     );
   };
   
-
-
   return (
     <div className="container mx-auto py-8 px-6 sm:px-2 ">
       <h1 className="text-3xl text-white font-bold mb-4">Products</h1>

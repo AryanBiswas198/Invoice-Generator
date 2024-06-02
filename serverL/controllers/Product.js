@@ -136,6 +136,10 @@ exports.calculateTotalRate = async (req, res) => {
 
         totalGST = totalRate * 0.18;
 
+
+        console.log("Printing Total Rate: ", totalRate);
+        console.log("Printing total GST: ", totalGST);
+
         return res.status(200).json({
             success: true,
             totalRate,

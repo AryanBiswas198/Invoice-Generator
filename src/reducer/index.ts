@@ -1,7 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
+
 import authReducer from "../slices/authSlice";
 import productReducer from "../slices/productsSlice";
 import profileSlice from "../slices/profileSlice";
+
+// import { RootState } from "../services/operations/productAPI";
 
 // Combine all reducers
 const rootReducer = combineReducers({
