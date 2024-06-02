@@ -69,13 +69,13 @@ export default function VerifyEmail() {
               type="text"
               value={otp}
               onChange={handleOtpChange}
-              className="w-full px-4 py-3 mb-1 bg-richblack-900 rounded-md border border-richblack-50 focus:outline-none text-white"
+              className="w-full px-4 py-3 mb-1 bg-gray-950 rounded-md border border-gray-50 focus:outline-none text-white"
             />
           </div>
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full my-3 border font-semibold border-richblack-50 bg-white text-black hover:bg-black hover:text-white px-4 py-2 rounded-md"
+              className="w-full my-3 border font-semibold border-gray-50 bg-white text-black hover:bg-black hover:text-white px-4 py-2 rounded-md"
             >
               Verify
             </button>
