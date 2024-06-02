@@ -1,13 +1,17 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 // Define the Axios instance
-const axiosInstance: AxiosInstance = axios.create({});
+const axiosInstance: AxiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+});
 
 // Define the generic ResponseData interface
 interface ResponseData<T = any> {
     success: boolean;
     message: string;
     data: T;
+    user?: User; 
+    token?: string; 
 }
 
 // Define the specific data interfaces
