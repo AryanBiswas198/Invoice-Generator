@@ -4,7 +4,7 @@ const User = require("../models/User");
 // Add Product Function
 exports.addProduct = async (req, res) => {
   try {
-    const { name, price } = req.body;
+    const { name, price} = req.body;
 
     const ownerId = req.user.id;
 
@@ -22,6 +22,7 @@ exports.addProduct = async (req, res) => {
       name,
       price,
       owner: ownerId,
+      // realId,
     });
 
     return res.status(200).json({
@@ -40,11 +41,48 @@ exports.addProduct = async (req, res) => {
 };
 
 // Remove Product Function
+// exports.removeProduct = async (req, res) => {
+//   try {
+//     const { productId } = req.body;
+
+//     const product = await Product.findById(productId);
+
+//     if (!product) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Product not found",
+//       });
+//     }
+
+//     if (product.owner.toString() !== req.user.id) {
+//       return res.status(403).json({
+//         success: false,
+//         message: "You are not authorized to remove this product",
+//       });
+//     }
+
+//     await Product.findByIdAndDelete(productId);
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Product removed successfully",
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to remove product",
+//     });
+//   }
+// };
+
+
+
 exports.removeProduct = async (req, res) => {
   try {
-    const { productId } = req.body;
+    const { realId } = req.body;
 
-    const product = await Product.findById(productId);
+    const product = await Product.findOne({realId: realId});
 
     if (!product) {
       return res.status(404).json({
@@ -60,7 +98,7 @@ exports.removeProduct = async (req, res) => {
       });
     }
 
-    await Product.findByIdAndDelete(productId);
+    await product.delete();
 
     return res.status(200).json({
       success: true,
@@ -74,7 +112,6 @@ exports.removeProduct = async (req, res) => {
     });
   }
 };
-
 
 // Update Product Quantity Function
 exports.updateProductQuantity = async (req, res) => {

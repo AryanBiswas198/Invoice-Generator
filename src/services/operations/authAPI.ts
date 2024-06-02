@@ -112,7 +112,7 @@ export const login = (
         }
 
         toast.success("Login Successful");
-        dispatch(setToken(response.data?.data?.token));
+        dispatch(setToken(response.data?.token));
         const userImage =
             response.data.data?.user?.image ||
             `https://api.dicebear.com/5.x/initials/svg?seed=${response.data?.data?.user?.firstName} ${response.data?.data?.user?.lastName}`;
@@ -124,9 +124,10 @@ export const login = (
             "token",
             JSON.stringify(response.data.token)
         );
+
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        navigate("/main-page");
+        navigate("/product-page");
     } catch (error) {
         console.log("LOGIN API ERROR............", error);
         toast.error("Login Failed");

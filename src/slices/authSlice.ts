@@ -24,6 +24,7 @@ const authSlice = createSlice({
     },
     setToken(state, action: PayloadAction<string | null>) {
       state.token = action.payload;
+      console.log("Printing token inside slice: ", state.token);
     },
   },
 });

@@ -11,11 +11,15 @@ interface Product {
 interface ProductsState {
   products: Product[];
   loading: boolean;
+  totalRate: number;
+  totalGST: number;
 }
 
 const initialState: ProductsState = {
   products: [],
   loading: false,
+  totalRate: 0,
+  totalGST: 0,
 };
 
 const productsSlice = createSlice({
@@ -38,9 +42,15 @@ const productsSlice = createSlice({
     removeProduct(state, action: PayloadAction<string>) {
       state.products = state.products.filter(product => product.id !== action.payload);
     },
+    setTotalRate(state, action: PayloadAction<number>) {
+      state.totalRate = action.payload;
+    },
+    setTotalGST(state, action: PayloadAction<number>) {
+      state.totalGST = action.payload;
+    }
   },
 });
 
-export const { setLoading, addProduct, updateProductQuantity, removeProduct } = productsSlice.actions;
+export const { setLoading, addProduct, updateProductQuantity, removeProduct, setTotalRate, setTotalGST } = productsSlice.actions;
 
 export default productsSlice.reducer;

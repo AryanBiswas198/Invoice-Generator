@@ -10,8 +10,8 @@ interface ResponseData<T = any> {
     success: boolean;
     message: string;
     data: T;
-    user?: User; 
-    token?: string; 
+    user?: User | null; 
+    token?: string | null; 
 }
 
 // Define the specific data interfaces

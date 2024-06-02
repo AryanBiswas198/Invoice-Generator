@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SignupPage from "./components/core/SignupPage"
 import LoginPage from "./components/core/LoginPage"
 import VerifyEmail from "./pages/VerifyEmail";
-import MainPage from "./pages/MainPage";
+import ProductPage from "./pages/ProductPage";
 
 import "./App.css";
 
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <Route path="signupPage" element={<SignupPage />} />
         <Route path="loginPage" element={<LoginPage />} />
         <Route path="verify-email" element={<VerifyEmail />} />
-        <Route path="main-page" element={<MainPage />} />
+        <Route path="product-page" element={<ProductPage />} />
       </Routes>
     </div>
   );
