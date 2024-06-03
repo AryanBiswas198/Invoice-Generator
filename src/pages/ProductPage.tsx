@@ -4,6 +4,8 @@ import { addProductAPI, removeProductAPI, updateProductQuantityAPI, calculateTot
 import { products } from "../data";
 
 import { AppDispatch, RootState } from "../services/operations/productAPI";
+import { Link } from "react-router-dom";
+import GeneratePDFButton from "../components/GeneratePDFButton";
 
 type Product = {
     id: number;
@@ -169,6 +171,8 @@ const renderCart = () => {
           <p className="text-3xl md:text-4xl text-gray-300 my-2 font-bold">Total:    <span className="text-2xl md:text-3xl text-gray-100">${totalRate.toFixed(2)}</span></p>
           <p className="text-xl md:text-2xl font-bold my-2 text-gray-300">GST: ${totalGST.toFixed(2)}</p>
           <p className="text-red-500 text-3xl md:text-4xl border-t-2 py-2 my-4 font-semibold">Grand Total: ${(totalRate + totalGST).toFixed(2)}</p>
+
+          <GeneratePDFButton />
         </div>
       </div>
     );
@@ -176,7 +180,6 @@ const renderCart = () => {
   
   return (
     <div className="container mx-auto py-8 px-6 sm:px-2 ">
-      <h1 className="text-3xl text-white font-bold mb-4">Products</h1>
       <div className="flex flex-col lg:flex-row gap-10">
         {renderProductList()}
         {renderCart()}
