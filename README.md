@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+Contains backend files inside the frontend file. For downloading frontend package, simply stay at the directory and download the package. For downloading server packagaes, just cd serverL and npm i.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
