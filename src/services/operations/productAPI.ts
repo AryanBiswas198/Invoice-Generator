@@ -4,13 +4,13 @@ import { AnyAction } from "redux";
 import { RootState } from "../../reducer";
 import { apiConnector } from "../apiconnector";
 import { productEndpoints } from "../apis";
-import { setLoading, addProduct, removeProduct, updateProductQuantity, setTotalGST, setTotalRate } from "../../slices/productsSlice";
+import { setLoading, addProduct, removeProduct, updateProductQuantity, setProducts } from "../../slices/productsSlice";
 
 const {
     ADDPRODUCT_API,
     REMOVEPRODUCT_API,
     UPDATE_PRODUCT_QUANTITY_API,
-    CALCULATE_TOTAL_RATE_API,
+    // CALCULATE_TOTAL_RATE_API,
     GET_ALL_USER_PRODUCTS_API,
 } = productEndpoints;
 
@@ -113,45 +113,45 @@ export const updateProductQuantityAPI = (id: string, quantity: number, token: st
 
 
 
-export interface TotalRateAndGST {
-    totalRate: number;
-    totalGST: number;
-}
+// export interface TotalRateAndGST {
+//     totalRate: number;
+//     totalGST: number;
+// }
 
-export const calculateTotalRateAPI = (token: string | null) => {
-    return async (dispatch: AppDispatch) => {
-        const toastId = toast.loading("Calculating total rate...");
-        dispatch(setLoading(true));
+// export const calculateTotalRateAPI = (token: string | null) => {
+//     return async (dispatch: AppDispatch) => {
+//         const toastId = toast.loading("Calculating total rate...");
+//         dispatch(setLoading(true));
 
-        try {
-            const response = await apiConnector("GET", CALCULATE_TOTAL_RATE_API, null, {
-                Authorization: `Bearer ${token}`,
-            });
-            console.log("CALCULATE TOTAL RATE API RESPONSE -> ", response);
+//         try {
+//             const response = await apiConnector("GET", CALCULATE_TOTAL_RATE_API, null, {
+//                 Authorization: `Bearer ${token}`,
+//             });
+//             console.log("CALCULATE TOTAL RATE API RESPONSE -> ", response);
 
-            if (!response || !response.data || !response.data.success) {
-                throw new Error(response.data.message);
-            }
+//             if (!response || !response.data || !response.data.success) {
+//                 throw new Error(response.data.message);
+//             }
 
-            const { totalRate, totalGST }: TotalRateAndGST = response.data;
-            toast.success(`Total rate and GST calculated successfully`);
-            // You can dispatch actions to store totalRate and totalGST in Redux state if needed
-            dispatch(setTotalRate(totalRate));
-            dispatch(setTotalGST(totalGST));
+//             const { totalRate, totalGST }: TotalRateAndGST = response.data;
+//             toast.success(`Total rate and GST calculated successfully`);
+//             // You can dispatch actions to store totalRate and totalGST in Redux state if needed
+//             dispatch(setTotalRate(totalRate));
+//             dispatch(setTotalGST(totalGST));
 
-            dispatch(setLoading(false));
-            toast.dismiss(toastId);
-            return response;
-        } 
-        catch (error) {
-            console.error("CALCULATE TOTAL RATE API ERROR -> ", error);
-            toast.error("Failed to calculate total rate and GST");
-        }
+//             dispatch(setLoading(false));
+//             toast.dismiss(toastId);
+//             return response;
+//         } 
+//         catch (error) {
+//             console.error("CALCULATE TOTAL RATE API ERROR -> ", error);
+//             toast.error("Failed to calculate total rate and GST");
+//         }
 
-        dispatch(setLoading(false));
-        toast.dismiss(toastId);
-    };
-};
+//         dispatch(setLoading(false));
+//         toast.dismiss(toastId);
+//     };
+// };
 
 
 export const getAllUserProductsAPI = (token: string | null) => {
@@ -169,13 +169,15 @@ export const getAllUserProductsAPI = (token: string | null) => {
           throw new Error(response.data.message);
         }
   
-        const userProducts = response.data?.data?.userProducts;
+        const userProducts = response.data?.products;
+        console.log("USer products: ", userProducts);
         if (userProducts) {
-          userProducts.forEach((product: any) => {
-            dispatch(addProduct(product));
-          });
+            dispatch(setProducts(userProducts));
         }
         toast.success("User products fetched successfully");
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+        return response;
       } catch (error) {
         console.error("GET ALL USER PRODUCTS API ERROR -> ", error);
         toast.error("Failed to fetch user products");

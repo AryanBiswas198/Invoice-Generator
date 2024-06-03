@@ -49,10 +49,13 @@ const productsSlice = createSlice({
     },
     setTotalGST(state, action: PayloadAction<number>) {
       state.totalGST = action.payload;
-    }
+    },
+    setProducts(state, action) {
+      state.products = action.payload;
+    },
   },
 });
 
-export const { setLoading, addProduct, updateProductQuantity, removeProduct, setTotalRate, setTotalGST } = productsSlice.actions;
+export const { setLoading, addProduct, updateProductQuantity, removeProduct, setTotalRate, setTotalGST, setProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
