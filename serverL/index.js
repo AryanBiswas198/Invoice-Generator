@@ -89,10 +89,6 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
 
 
 
-
-
-
-
 app.get("/", (req, res) => {
     return res.json({
         success: true,
