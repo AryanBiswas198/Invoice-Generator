@@ -32,12 +32,12 @@ interface User {
 //     price: number;
 // }
 
-interface Pagination {
-    currentPage: number;
-    totalPages: number;
-    pageSize: number;
-    totalItems: number;
-}
+// interface Pagination {
+//     currentPage: number;
+//     totalPages: number;
+//     pageSize: number;
+//     totalItems: number;
+// }
 
 // interface PaginatedResponse<T = any> {
 //     items: T[];
