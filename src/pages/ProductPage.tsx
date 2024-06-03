@@ -7,8 +7,8 @@ import {
 } from "../services/operations/productAPI";
 import { products } from "../data";
 
-import { AppDispatch, RootState } from "../services/operations/productAPI";
-import GeneratePDFButton from "../components/GeneratePDFButton";
+import { AppDispatch } from "../services/operations/productAPI";
+import {RootState} from "../reducer";
 import { Link } from "react-router-dom";
 
 type Product = {

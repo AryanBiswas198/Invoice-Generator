@@ -38,7 +38,7 @@ app.use("/api/v1/product", productRoutes);
 
 
 app.post('/api/v1/generate-pdf', auth, async (req, res) => {
-    const { user, products, token } = req.body;
+    const { user, products} = req.body;
 
     let totalRate = 0;
     const processedProducts = products.map(product => {

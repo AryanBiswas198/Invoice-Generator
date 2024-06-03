@@ -38,9 +38,9 @@ export default function VerifyEmail() {
     dispatch(sendOtp(signupData.email, navigate) as any);
   };
 
-  const handleClose = () => {
-    navigate("/");
-  };
+  // const handleClose = () => {
+  //   navigate("/");
+  // };
 
   return (
     <div className="bg-black min-h-screen flex flex-col md:flex-row items-center justify-center p-4">

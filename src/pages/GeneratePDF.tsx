@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUserProductsAPI } from "../services/operations/productAPI";
-import { AppDispatch, RootState } from '../services/operations/productAPI';
+import { AppDispatch } from '../services/operations/productAPI';
+import { RootState } from '../reducer';
 import axios from 'axios';
-import { apiConnector } from '../services/apiconnector';
 
 const BASE_URL: string = import.meta.env.VITE_BASE_URL as string;
 
@@ -15,7 +14,7 @@ const GeneratePDF = () => {
 
   console.log("Printing products", products);
 
-  const downloadPDF = async (user: any, products: any, token: string) => {
+  const downloadPDF = async (user: any, products: any, token: string | null) => {
     console.log("Printing user: ", user);
     try {
       const response = await axios.post(BASE_URL + `/generate-pdf`, {

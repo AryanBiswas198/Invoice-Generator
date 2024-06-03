@@ -12,6 +12,8 @@ interface ResponseData<T = any> {
     data: T;
     user?: User | null; 
     token?: string | null; 
+    products?: [] | null;
+    product?: any | null;
 }
 
 // Define the specific data interfaces
@@ -23,12 +25,12 @@ interface User {
     updatedAt: string;
 }
 
-interface Item {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-}
+// interface Item {
+//     id: number;
+//     name: string;
+//     description: string;
+//     price: number;
+// }
 
 interface Pagination {
     currentPage: number;
