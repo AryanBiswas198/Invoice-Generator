@@ -11,7 +11,7 @@ interface ResponseData<T = any> {
     message: string;
     data: T;
     user?: User | null; 
-    token?: string | null; 
+    token?: any; 
     products?: [] | null;
     product?: any | null;
 }
@@ -39,10 +39,10 @@ interface Pagination {
     totalItems: number;
 }
 
-interface PaginatedResponse<T = any> {
-    items: T[];
-    pagination: Pagination;
-}
+// interface PaginatedResponse<T = any> {
+//     items: T[];
+//     pagination: Pagination;
+// }
 
 // Define the apiConnector function
 type ApiConnector = <T = any>(
