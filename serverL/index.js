@@ -92,7 +92,15 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
         grandTotal: grandTotal
     });
     // Launch Puppeteer and generate PDF
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        devtools: true,
+        args: [
+            '--disable-web-security',
+            '--disable-features=IsolateOrigins',
+            '--disable-site-isolation-trials'
+        ]
+    });
     const page = await browser.newPage();
     await page.setContent(html);
     const pdfBuffer = await page.pdf({ 
