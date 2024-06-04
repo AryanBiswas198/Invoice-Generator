@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllUserProductsAPI } from "../services/operations/productAPI";
 import { AppDispatch } from '../services/operations/productAPI';
 import { RootState } from '../reducer';
-import axios from 'axios';
+// import axios from 'axios';
+import { apiConnector } from '../services/apiconnector';
 
 const BASE_URL: string = import.meta.env.VITE_BASE_URL as string;
 
@@ -17,13 +18,25 @@ const GeneratePDF = () => {
   const downloadPDF = async (user: any, products: any, token: string | null) => {
     console.log("Printing user: ", user);
     try {
-      const response = await axios.post(BASE_URL + `/generate-pdf`, {
-        user,
-        products,
-        token,
-      }, { responseType: 'blob' });
+      // const response = await axios.post(BASE_URL + `/generate-pdf`, {
+      //   user,
+      //   products,
+      //   token,
+      // }, { responseType: 'blob' });
+
+      const response = await apiConnector(
+        "POST",
+        `${BASE_URL}/generate-pdf`,
+        { user, products, token },
+        undefined,
+        null,
+        'blob' // Specify responseType as 'blob'
+    );
+
+      const pdfData = response.data;
+      console.log(pdfData);
   
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const url = window.URL.createObjectURL(new Blob([response.data as any]));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', 'invoice.pdf');

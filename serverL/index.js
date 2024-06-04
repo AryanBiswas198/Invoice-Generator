@@ -98,7 +98,8 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
         args: [
             '--disable-web-security',
             '--disable-features=IsolateOrigins',
-            '--disable-site-isolation-trials'
+            '--disable-site-isolation-trials',
+            '--disable-features=BlockInsecurePrivateNetworkRequests'
         ]
     });
     const page = await browser.newPage();
