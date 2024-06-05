@@ -116,6 +116,7 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
         'Content-Type': 'application/pdf',
         'Content-Length': pdfBuffer.length
     });
+    res.set('Access-Control-Allow-Origin', req.get('Origin'));
     res.send(pdfBuffer);
 });
 
