@@ -18,17 +18,12 @@ const GeneratePDF = () => {
   const downloadPDF = async (user: any, products: any, token: string | null) => {
     console.log("Printing user: ", user);
     try {
-      // const response = await axios.post(BASE_URL + `/generate-pdf`, {
-      //   user,
-      //   products,
-      //   token,
-      // }, { responseType: 'blob' });
-
       const response = await apiConnector(
         "POST",
         `${BASE_URL}/generate-pdf`,
         { user, products, token },
-        undefined,
+        // undefined,
+        { Authorization: `Bearer ${token}` },
         null,
         'blob' // Specify responseType as 'blob'
     );

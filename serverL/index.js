@@ -28,7 +28,8 @@ app.use(
     cors({
         origin: "*",
         credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
     })
 );
 
@@ -84,8 +85,8 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
     // Compile template with Handlebars
     const template = Handlebars.compile(templateHtml);
     const html = template({
-        userName: user.name,
-        userEmail: user.email,
+        userName: user?.name,
+        userEmail: user?.email,
         products: processedProducts,
         totalRate: totalRate,
         totalGST: totalGST,
@@ -114,7 +115,10 @@ app.post('/api/v1/generate-pdf', auth, async (req, res) => {
     // Send PDF as response
     res.set({
         'Content-Type': 'application/pdf',
-        'Content-Length': pdfBuffer.length
+        'Content-Length': pdfBuffer.length,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     });
     res.set('Access-Control-Allow-Origin', req.get('Origin'));
     res.send(pdfBuffer);
